@@ -21,13 +21,17 @@
                                 {{$post->title}}
                             </td>
                             <td>
-                                <img src = "{{ asset('storage/'.$post->image) }}"
-                                     height="50px" width="50px"/>
+                                @if($post->image)
+                                    <img src = "{{ asset('storage/'.$post->image) }}"
+                                         height="50px" width="50px"/>
+                                @endif
                             </td>
                             <td>
-                                <a href="" class="btn btn-success btn-sm">View</a>
+                                @if(!$post->trashed())
+                                    <a href="" class="btn btn-success btn-sm">View</a>
+                                @endif
                                 <button class="btn btn-danger btn-sm" onclick="handelDelete({{$post->id}})">
-                                    Delete
+                                    {{ $post->trashed() ? 'Delete' : 'Trash' }}
                                 </button>
                             </td>
                         </tr>
@@ -49,11 +53,11 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                            Do you want to delete this post?
+                                Do you want to delete this post?
                         </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger">Trash</button>
                             </div>
                         </div>
                     </form>

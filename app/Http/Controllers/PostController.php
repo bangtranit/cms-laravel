@@ -95,10 +95,32 @@ class PostController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy(Post $post)
+    public function destroy($id) //change to $id if you want force delete post has trashed
     {
-        $post->delete();
-        session()->flash('success', 'Deleted Post Successfully');
+        $post = Post::withTrashed()->where('id', $id)->firstOrFail();
+        if (!$post){
+            session()->flash('success', 'Not Found');
+            return Redirect()->route('posts.index');
+        }else{
+            if ($post->trashed()){
+                $post->forceDelete();
+                session()->flash('success', 'Deleted Post Successfully');
+            }else{
+                $post->delete();
+                session()->flash('success', 'Trashed Post Successfully');
+            }
+        }
         return Redirect()->route('posts.index');
+    }
+
+    /**
+     * Show the the trahsed posts.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function trashedPosts()
+    {
+        $posts = Post::onlyTrashed()->get();
+        return view('posts.index', compact('posts'));
     }
 }

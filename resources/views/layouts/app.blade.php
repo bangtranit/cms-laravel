@@ -50,7 +50,8 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -84,11 +85,19 @@
                             </ul>
                         </div>
                     @endif
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">
+                            {{session()->get('success')}}
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-md-4">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="#">Posts</a>
+                                    <a href={{Route('categories.index')}}>Categories</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href={{Route('posts.index')}}>Posts</a>
                                 </li>
                             </ul>
                         </div>

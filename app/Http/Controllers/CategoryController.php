@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index');
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -35,13 +35,14 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateCategoryRequest $request)
     {
         $validated = $request->validated();
-        Category::create($request->all);
+        Category::create($request->all());
         session()->flash('success', 'created category successfully');
+        return redirect()->to('categories');
     }
 
     /**

@@ -34,7 +34,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \CreateCategoryRequest $request
+     * @param  \App\Http\Requests\Category\CreateCategoryRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateCategoryRequest $request)

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -104,6 +105,7 @@ class PostController extends Controller
         }else{
             if ($post->trashed()){
                 $post->forceDelete();
+                Storage::delete($post->image);
                 session()->flash('success', 'Deleted Post Successfully');
             }else{
                 $post->delete();

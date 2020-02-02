@@ -8,13 +8,25 @@
             Categories
         </div>
         <div class="card-body">
-            <ul class="list-group">
-                @foreach($categories as $cat)
-                    <li class="list-group-item">
-                        {{$cat->title}}
-                    </li>
-                @endforeach
-            </ul>
+            <table class="table table-bordered">
+                <thead>
+                    <th>Name</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    @foreach($categories as $category)
+                        <tr>
+                            <td>{{$category->title}}</td>
+                            <td>
+                                <a href={{Route('categories.edit', $category->id)}}
+                                        class="btn btn-info btn-sm ">
+                                    Edit
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

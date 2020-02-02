@@ -42,7 +42,7 @@ class CategoryController extends Controller
         $validated = $request->validated();
         Category::create($request->all());
         session()->flash('success', 'created category successfully');
-        return redirect()->to('categories');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -51,20 +51,20 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -72,11 +72,14 @@ class CategoryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $validated = $request->validated();
+        $category->update($request->all());
+        session()->flash('success', 'Updated category successfully');
+        return redirect()->route('categories.index');
     }
 
     /**

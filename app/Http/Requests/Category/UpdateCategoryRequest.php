@@ -13,7 +13,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'nhap title vao thim',
+            'description.required' => 'nhap description vao thim',
+            'title.max' => 'nhap title duoi 255  thim',
+            'description.max' => 'nhap description duoi 255 thim',
         ];
     }
 }

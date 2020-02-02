@@ -36,7 +36,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CreatePostRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreatePostRequest $request)
@@ -91,11 +91,14 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Post $post
-     * @return \Illuminate\Http\Response
+     * @param Post $post
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        session()->flash('success', 'Deleted Post Successfully');
+        return Redirect()->route('posts.index');
     }
 }

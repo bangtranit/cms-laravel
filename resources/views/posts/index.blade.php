@@ -34,7 +34,7 @@
                             </td>
                             <td>
                                 @if(!$post->trashed())
-                                    <a href="" class="btn btn-success btn-sm">View</a>
+                                    <a href={{Route('posts.show', $post->id)}} class="btn btn-success btn-sm">View</a>
                                 @endif
                                 <button class="btn btn-danger btn-sm" onclick="handelDelete({{$post->id}})">
                                     {{ $post->trashed() ? 'Delete' : 'Trash' }}

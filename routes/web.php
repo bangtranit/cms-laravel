@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::resource('/categories', 'CategoryController');
-Route::resource('/posts', 'PostController');
-Route::get('/trashed-posts', 'PostController@trashedPosts')->name('posts.trashed');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', 'HomeController@index')->name('home');
+    Route::resource('/categories', 'CategoryController');
+    Route::resource('/posts', 'PostController');
+    Route::get('/trashed-posts', 'PostController@trashedPosts')->name('posts.trashed');
+});
+

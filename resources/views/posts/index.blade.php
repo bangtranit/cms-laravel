@@ -1,8 +1,14 @@
 @extends('layouts.app')
 @section('content')
-    <div class="d-flex justify-content-end mb-2">
-        <a href={{Route('posts.create')}} class="btn btn-primary float-right mr-2"> Add Post</a>
-    </div>
+    @php
+        $routeName = Route::currentRouteName();
+    @endphp
+    @if($routeName !== "posts.trashed")
+        <div class="d-flex justify-content-end mb-2">
+            <a href={{Route('posts.create')}} class="btn btn-primary float-right mr-2"> Add Post</a>
+        </div>
+    @endif
+
     <div class="card card-default">
         <div class="card-header">
             Posts

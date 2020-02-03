@@ -34,7 +34,13 @@
                             </td>
                             <td>
                                 @if(!$post->trashed())
-                                    <a href={{Route('posts.show', $post->id)}} class="btn btn-success btn-sm">View</a>
+                                    <a href={{Route('posts.edit', $post)}} class="btn btn-success btn-sm">View</a>
+                                @else
+                                    <form action={{Route('posts.restore', $post->id)}} method="POST">
+                                    @csrf
+                                    @method("PUT")
+                                        <button class="btn btn-info btn-sm" type="submit">Restore</button>
+                                    </form>
                                 @endif
                                 <button class="btn btn-danger btn-sm" onclick="handelDelete({{$post->id}})">
                                     {{ $post->trashed() ? 'Delete' : 'Trash' }}

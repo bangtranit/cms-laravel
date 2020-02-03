@@ -44,6 +44,7 @@ class PostController extends Controller
     {
         $validated = $request->validated();
         $imagePath = ($request->image->store('posts'));
+        dd($imagePath);
         Post::create([
             'title' => $request['title'],
             'description' => $request['description'],
@@ -70,11 +71,11 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  Post $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -82,11 +83,30 @@ class PostController extends Controller
      *
      * @param  UpdatePostRequest $request, Post $post
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $validated = $request->validated();
+        $data = $request->only([
+            'title',
+            'description',
+            'content',
+            'published_at',
+        ]);
+        $imagePath = $request->image;
+        if ($request->hasFile('image')){
+            $imagePath = ($request->image->store('posts'));
+            $post->deleteImage();
+        }
+        $post->title = $request['title'];
+        $post->description = $request['description'];
+        $post->content = $request['content'];
+        $post->image = $imagePath;
+        $post->published_at = $request['published_at'];
+        $post->save();
+        session()->flash('success', 'Updated Post Successfully');
+        return Redirect()->route('posts.index');
     }
 
     /**
@@ -105,7 +125,7 @@ class PostController extends Controller
         }else{
             if ($post->trashed()){
                 $post->forceDelete();
-                Storage::delete($post->image);
+                $post->deleteImage();
                 session()->flash('success', 'Deleted Post Successfully');
             }else{
                 $post->delete();
@@ -124,5 +144,16 @@ class PostController extends Controller
     {
         $posts = Post::onlyTrashed()->get();
         return view('posts.index', compact('posts'));
+    }
+
+    public function restorePost($id){
+        $post = Post::withTrashed()->where('id', $id)->firstOrFail();
+        if ($post->trashed()){
+            $post->restore();
+            session()->flash('success', 'Restored Post Successfully');
+        }else{
+            session()->flash('success', 'Post Not Found');
+        }
+        return Redirect()->route('posts.index');
     }
 }

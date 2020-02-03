@@ -4,10 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
     //
+    /**
+     * use soft delete
+     */
     use SoftDeletes;
     protected $table = 'posts';
     protected $primaryKey = 'id';
@@ -20,4 +24,10 @@ class Post extends Model
     ];
     protected $dates = ['deleted_at'];
 
+    /**
+     * Delete image after update image
+     */
+    public function deleteImage(){
+        Storage::delete($this->image);
+    }
 }

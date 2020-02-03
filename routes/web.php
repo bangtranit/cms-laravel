@@ -22,5 +22,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/categories', 'CategoryController');
     Route::resource('/posts', 'PostController');
     Route::get('/trashed-posts', 'PostController@trashedPosts')->name('posts.trashed');
+    Route::put('/posts-restore/{post}', 'PostController@restorePost')->name('posts.restore');
 });
 

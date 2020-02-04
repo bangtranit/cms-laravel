@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\Post\CreatePostRequest;
@@ -31,7 +32,8 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create', compact('categories'));
     }
 
     /**
@@ -44,13 +46,13 @@ class PostController extends Controller
     {
         $validated = $request->validated();
         $imagePath = ($request->image->store('posts'));
-        dd($imagePath);
         Post::create([
             'title' => $request['title'],
             'description' => $request['description'],
             'content' => $request['content'],
             'image' => $imagePath,
             'published_at' => $request{'published_at'},
+            'category_id' => $request['category_id'],
         ]);
         session()->flash('success', 'Created Post Successfully');
         return Redirect()->Route('posts.index');
@@ -75,7 +77,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -93,6 +96,7 @@ class PostController extends Controller
             'description',
             'content',
             'published_at',
+            'category_id',
         ]);
         $imagePath = $request->image;
         if ($request->hasFile('image')){
@@ -104,6 +108,7 @@ class PostController extends Controller
         $post->content = $request['content'];
         $post->image = $imagePath;
         $post->published_at = $request['published_at'];
+        $post->category_id = $request['category_id'];
         $post->save();
         session()->flash('success', 'Updated Post Successfully');
         return Redirect()->route('posts.index');

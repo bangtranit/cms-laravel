@@ -11,12 +11,14 @@
             <table class="table table-bordered">
                 <thead>
                     <th>Name</th>
+                    <th>Post Count</th>
                     <th>Action</th>
                 </thead>
                 <tbody>
                     @foreach($categories as $category)
                         <tr>
                             <td>{{$category->title}}</td>
+                            <td>{{$category->posts->count()}}</td>
                             <td>
                                 <a href={{Route('categories.edit', $category->id)}}
                                         class="btn btn-info btn-sm ">

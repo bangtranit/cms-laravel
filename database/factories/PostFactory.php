@@ -4,6 +4,7 @@
 
 use App\Model;
 use App\Post;
+use App\Category;
 use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
@@ -16,5 +17,6 @@ $factory->define(Post::class, function (Faker $faker) {
             '',
             ]),
         'published_at' => $faker->dateTime(),
+        'category_id' => Category::all()->random()->id,
     ];
 });

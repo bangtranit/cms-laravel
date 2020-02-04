@@ -34,7 +34,17 @@
                            name="published_at" id="published_at" value="{{$post->published_at}}">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Add Post</button>
+                    <label for="category_id">Category</label>
+                    <select id="category_id" name="category_id" class="form-control">
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}" {{$post->category_id === $category->id ? 'selected' : ''}}>
+                                {{$category->title}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update Post</button>
                 </div>
             </form>
         </div>

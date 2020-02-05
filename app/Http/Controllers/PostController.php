@@ -67,16 +67,8 @@ class PostController extends Controller
         $post->published_at = $request{'published_at'};
         $post->category_id = $request['category_id'];
         $post->save();
-//        $post = Post::create([
-//            'title' => $request['title'],
-//            'description' => $request['description'],
-//            'content' => $request['content'],
-//            'image' => $imagePath,
-//            'published_at' => $request{'published_at'},
-//            'category_id' => $request['category_id'],
-//        ]);
-        if($request->tag){
-            $post->tags()->attach($request->tag);
+        if($request->tags){
+            $post->tags()->attach($request->tags);
         }
         session()->flash('success', 'Created Post Successfully');
         return Redirect()->Route('posts.index');

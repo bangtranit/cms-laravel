@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
@@ -39,7 +40,8 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -50,16 +52,32 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
+//        dd($request->all());
         $validated = $request->validated();
-        $imagePath = ($request->image->store('posts'));
-        Post::create([
-            'title' => $request['title'],
-            'description' => $request['description'],
-            'content' => $request['content'],
-            'image' => $imagePath,
-            'published_at' => $request{'published_at'},
-            'category_id' => $request['category_id'],
-        ]);
+        $imagePath = "";
+        if ($request->image){
+            $imagePath = ($request->image->store('posts'));
+        }
+//        dd($request->all());
+        $post = new Post;
+        $post->title = $request['title'];
+        $post->description = $request['description'];
+        $post->content = $request['content'];
+        $post->image = $imagePath;
+        $post->published_at = $request{'published_at'};
+        $post->category_id = $request['category_id'];
+        $post->save();
+//        $post = Post::create([
+//            'title' => $request['title'],
+//            'description' => $request['description'],
+//            'content' => $request['content'],
+//            'image' => $imagePath,
+//            'published_at' => $request{'published_at'},
+//            'category_id' => $request['category_id'],
+//        ]);
+        if($request->tag){
+            $post->tags()->attach($request->tag);
+        }
         session()->flash('success', 'Created Post Successfully');
         return Redirect()->Route('posts.index');
     }
@@ -84,7 +102,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**

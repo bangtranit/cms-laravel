@@ -38,7 +38,16 @@
                         @endforeach
                     </select>
                 </div>
-
+                @if(count($tags) > 0)
+                    <div class="form-group">
+                        <label for="tag">Tag</label>
+                            <select class="form-control" name="tag">
+                                @foreach($tags as $tag)
+                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                @endforeach
+                            </select>
+                    </div>
+                @endif
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Add Post</button>
                 </div>

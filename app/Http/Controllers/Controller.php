@@ -10,4 +10,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function crudSuccess($typeFlash = "success", $message, $routeBack){
+        session()->flash($typeFlash, $message);
+        return redirect()->route(($routeBack));
+    }
 }

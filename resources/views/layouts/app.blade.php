@@ -27,29 +27,10 @@
 <body>
     <div id="app">
         @include('layouts.navigation')
-
         <main class="py-4">
         @auth()
                 <div class="container">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if(session()->has('success'))
-                        <div class="alert alert-success">
-                            {{session()->get('success')}}
-                        </div>
-                    @endif
-                    @if(session()->has('error'))
-                        <div class="alert alert-danger">
-                            {{session()->get('error')}}
-                        </div>
-                    @endif
+                    @include('partials.error')
                     <div class="row">
                         <div class="col-md-4">
                             <ul class="list-group">
@@ -58,6 +39,9 @@
                                 </li>
                                 <li class="list-group-item">
                                     <a href={{Route('posts.index')}}>Posts</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href={{Route('tags.index')}}>Tags</a>
                                 </li>
                             </ul>
                             <ul class="list-group mt-5">

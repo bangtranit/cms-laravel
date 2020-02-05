@@ -1,6 +1,7 @@
 <?php
 
 use App\Post;
+use App\Tag;
 use App\Category;
 use Illuminate\Database\Seeder;
 
@@ -15,5 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         factory(Category::class, 20)->create();
         factory(Post::class, 50)->create();
+        factory(Tag::class, 10)->create();
     }
 }

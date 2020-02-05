@@ -16,10 +16,10 @@
         <div class="card-body">
             <table class="table table-bordered">
                 <thead>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Category</th>
-                    <th>Action</th>
+                    <th width="40%">Name</th>
+                    <th width="20%">Image</th>
+                    <th width="15%">Category</th>
+                    <th width="25%">Action</th>
                 </thead>
                 <tbody>
                     @foreach($posts as $post)

@@ -14,7 +14,8 @@
         <div class="card-body">
             <table class="table table-bordered">
                 <thead>
-                <th width="75%">Name</th>
+                <th width="50%">Name</th>
+                <th width="25%">Posts</th>
                 <th width="25%">Action</th>
                 </thead>
                 <tbody>
@@ -22,6 +23,9 @@
                     <tr>
                         <td>
                             {{$tag->name}}
+                        </td>
+                        <td>
+                            {{$tag->posts->count()}}
                         </td>
                         <td>
                             <a href={{Route('tags.edit', $tag)}} class="btn btn-success btn-sm">View</a>

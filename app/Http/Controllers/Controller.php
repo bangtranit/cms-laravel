@@ -13,6 +13,8 @@ class Controller extends BaseController
 
     public function crudSuccess($typeFlash = "success", $message, $routeBack){
         session()->flash($typeFlash, $message);
-        return redirect()->route(($routeBack));
+        if ($routeBack)
+            return redirect()->route(($routeBack));
+        return redirect()->back();
     }
 }

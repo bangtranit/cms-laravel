@@ -91,6 +91,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        if ($category->posts->count() > 0){
+            return $this->crudSuccess('error', 'cannot delete this category', '');
+        }
         $category->delete();
         session()->flash('success', 'Deleted category successfully');
         return redirect()->route('categories.index');

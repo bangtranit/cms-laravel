@@ -93,6 +93,9 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        if ($tag->posts->count() > 0){
+            return $this->crudSuccess('error', 'cannot delete this tag');
+        }
         $tag->delete();
         return $this->crudSuccess('success', 'Delete Tag Successfully', 'tags.index');
 

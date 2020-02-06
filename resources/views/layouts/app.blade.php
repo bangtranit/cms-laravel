@@ -34,6 +34,11 @@
                     <div class="row">
                         <div class="col-md-4">
                             <ul class="list-group">
+                                @if(auth()->user()->role === 'ADMIN')
+                                    <li class="list-group-item">
+                                        <a href={{Route('users.index')}}>Users</a>
+                                    </li>
+                                @endif
                                 <li class="list-group-item">
                                     <a href={{Route('categories.index')}}>Categories</a>
                                 </li>

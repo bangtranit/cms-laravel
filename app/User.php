@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    const USER_ADMIN = 'ADMIN';
+    const USER_WRITER = 'WRITER';
     use Notifiable;
 
     /**
@@ -36,4 +38,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin(){
+        return $this->role == User::USER_ADMIN;
+    }
 }

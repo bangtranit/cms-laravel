@@ -26,6 +26,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/posts-restore/{post}', 'PostController@restorePost')->name('posts.restore');
 });
 
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::resource('users', 'UserController');
+});
+
+
 //Route::middleware(['auth'])->group(function (){
 //    Route::get('/dashboard', 'HomeController@index')->name('home');
 //    Route::resource('/categories', 'CategoryController');

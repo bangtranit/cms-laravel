@@ -28,7 +28,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+//        if (auth()->user()->isAdmin){
+            return view('categories.create');
+//        }
     }
 
     /**
@@ -91,7 +93,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if ($category->posts->count() > 0){
+        if ($category->posts->count() >  0){
             return $this->crudSuccess('error', 'cannot delete this category', '');
         }
         $category->delete();

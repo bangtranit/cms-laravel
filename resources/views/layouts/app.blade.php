@@ -34,7 +34,8 @@
                     <div class="row">
                         <div class="col-md-4">
                             <ul class="list-group">
-                                @if(auth()->user()->role === 'ADMIN')
+{{--                                @if(auth()->user()->role === 'ADMIN')--}}
+                                @if(auth()->user()->isAdmin)
                                     <li class="list-group-item">
                                         <a href={{Route('users.index')}}>Users</a>
                                     </li>

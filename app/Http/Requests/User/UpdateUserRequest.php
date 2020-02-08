@@ -26,7 +26,6 @@ class UpdateUserRequest extends FormRequest
         return [
             'id' => 'required',
             'name' => 'required|max:255',
-            'about' => 'max:1000'
         ];
     }
 
@@ -36,7 +35,6 @@ class UpdateUserRequest extends FormRequest
             'id.required' => 'nhap id vao thim',
             'name.required' => 'nhap name vao thim',
             'name.max' => 'nhap name duoi 255 vao thim',
-            'about.max' => 'nhap about duoi 1000 vao thim',
         ];
     }
 }

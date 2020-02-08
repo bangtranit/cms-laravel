@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\Tag;
 use App\Category;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,8 @@ class Post extends Model
         'content',
         'image',
         'published_at',
+        'user_id',
+        'category_id',
     ];
     protected $dates = ['deleted_at'];
 
@@ -39,6 +42,10 @@ class Post extends Model
 
     public function tags(){
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     /*check if has tag

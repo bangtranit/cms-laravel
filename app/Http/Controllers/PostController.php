@@ -52,13 +52,11 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-//        dd($request->all());
         $validated = $request->validated();
         $imagePath = "";
         if ($request->image){
             $imagePath = ($request->image->store('posts'));
         }
-//        dd($request->all());
         $post = new Post;
         $post->title = $request['title'];
         $post->description = $request['description'];
@@ -66,6 +64,7 @@ class PostController extends Controller
         $post->image = $imagePath;
         $post->published_at = $request{'published_at'};
         $post->category_id = $request['category_id'];
+        $post->user_id = auth()->user()->id;
         $post->save();
         if($request->tags){
             $post->tags()->attach($request->tags);
@@ -115,17 +114,16 @@ class PostController extends Controller
             'published_at',
             'category_id',
         ]);
-        $imagePath = $request->image;
-        if ($request->hasFile('image')){
-            $imagePath = ($request->image->store('posts'));
-            $post->deleteImage();
-        }
         $post->title = $request['title'];
         $post->description = $request['description'];
         $post->content = $request['content'];
-        $post->image = $imagePath;
         $post->published_at = $request['published_at'];
         $post->category_id = $request['category_id'];
+        if ($request->hasFile('image')){
+            $imagePath = ($request->image->store('posts'));
+            $post->deleteImage();
+            $post->image = $imagePath;
+        }
         $post->save();
         if ($request->tags){
             $post->tags()->sync($request->tags);

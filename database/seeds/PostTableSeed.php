@@ -45,7 +45,8 @@ class PostTableSeed extends Seeder
             standard dummy text ever since the 1500s, when an unknown printer took a 
             galley of type and scrambled it to make a type specimen book. ',
             'category_id' => $category1->id,
-            'image' => 'posts/1.jpg'
+            'image' => 'posts/1.jpg',
+            'user_id' => 2
 
         ]);
 
@@ -60,7 +61,8 @@ class PostTableSeed extends Seeder
             standard dummy text ever since the 1500s, when an unknown printer took a 
             galley of type and scrambled it to make a type specimen book. ',
             'category_id' => $category2->id,
-            'image' => 'posts/2.jpg'
+            'image' => 'posts/2.jpg',
+            'user_id' => 2
 
         ]);
 
@@ -75,7 +77,8 @@ class PostTableSeed extends Seeder
             standard dummy text ever since the 1500s, when an unknown printer took a 
             galley of type and scrambled it to make a type specimen book. ',
             'category_id' => $category3->id,
-            'image' => 'posts/3.jpg'
+            'image' => 'posts/3.jpg',
+            'user_id' => 1
 
         ]);
 
@@ -90,7 +93,8 @@ class PostTableSeed extends Seeder
             standard dummy text ever since the 1500s, when an unknown printer took a 
             galley of type and scrambled it to make a type specimen book. ',
             'category_id' => $category4->id,
-            'image' => 'posts/4.jpg'
+            'image' => 'posts/4.jpg',
+            'user_id' => 1
         ]);
 
         $tag1 = Tag::create([

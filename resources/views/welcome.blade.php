@@ -1,5 +1,9 @@
 <!-- Header -->
-@include('common.header')
+@section('title')
+    TheSaaS — Blog with sidebar
+@endsection
+@include('welcome_common.header')
+
 <!-- /.header -->
 
 <!-- Main Content -->
@@ -14,7 +18,7 @@
                         @foreach($posts as $post)
                             <div class="col-md-6">
                                 <div class="card border hover-shadow-6 mb-6 d-block">
-                                    <a href="#"><img class="card-img-top" src="{{generatePathImage($post->image)}}"
+                                    <a href="{{Route('blog.show', $post)}}"><img class="card-img-top" src="{{generatePathImage($post->image)}}"
                                                      alt="Card image cap"></a>
                                     <div class="p-6 text-center">
                                         <p>
@@ -65,13 +69,13 @@
                         <hr>
                             <h6 class="sidebar-title">Top posts</h6>
                             @foreach($posts as $post)
-                            <a class="media text-default align-items-center mb-5"
-                               href="blog-single.html">
-                                <img class="rounded w-65px mr-4" src="{{generatePathImage($post->image)}}">
-                                <p class="media-body small-2 lh-4 mb-0">
-                                    Best practices for minimalist design
-                                </p>
-                            </a>
+                                <a class="media text-default align-items-center mb-5"
+                                   href="{{Route('blog.show', $post)}}">
+                                    <img class="rounded w-65px mr-4" src="{{generatePathImage($post->image)}}">
+                                    <p class="media-body small-2 lh-4 mb-0">
+                                        Best practices for minimalist design
+                                    </p>
+                                </a>
                             @endforeach
                         <hr>
 
@@ -98,7 +102,7 @@
 
 
 <!-- Footer -->
-@include('common.footer')
+@include('welcome_common.footer')
 <!-- /.footer -->
 
 

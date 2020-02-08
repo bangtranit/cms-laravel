@@ -6,7 +6,9 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <title>TheSaaS — Blog with sidebar</title>
+    <title>
+        @yield('title')
+    </title>
 
     <!-- Styles -->
     <link href="{{asset('css/page.min.css')}}" rel="stylesheet">
@@ -19,7 +21,7 @@
 
 <body>
 <!-- Navbar -->
-@include('common.navigationbar')
+@include('welcome_common.navigationbar')
 <!-- /.navbar -->
 
 <!-- Header -->

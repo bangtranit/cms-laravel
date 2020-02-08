@@ -23,6 +23,15 @@ class UserTableSeed extends Seeder
                 'email_verified_at' => now(),
                 'remember_token' => Str::random(10),
             ]);
+
+            User::create([
+                'email' => 'bang2@gmail.com',
+                'name' => 'Thanh Bang Tran',
+                'password' => \Illuminate\Support\Facades\Hash::make('thanhbang'),
+                'role' => User::USER_ADMIN,
+                'email_verified_at' => now(),
+                'remember_token' => Str::random(10),
+            ]);
         }
     }
 }

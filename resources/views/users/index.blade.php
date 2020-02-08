@@ -28,7 +28,7 @@
                             {{$user->role}}
                         </td>
                         <td>
-                            @if($user->role !== \App\User::USER_ADMIN)
+                            @if(!$user->isAdmin())
                                 <button class="btn btn-success btn-sm" onclick="handleMakeAdmin({{$user->id}})">
                                     Make Admin
                                 </button>

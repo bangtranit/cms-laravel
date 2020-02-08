@@ -12,7 +12,9 @@ use App\Http\Controllers\Blog\PostsController;
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
-Route::get('blog/post/{post}', [PostsController::class, 'show'])->name('blog.show');
+Route::get('/blog/post/{post}', [PostsController::class, 'show'])->name('blog.show');
+Route::get('/search?keyword={keyword}', 'WelcomeController@listPostByKeyword')->name('blog.search');
+Route::get('/category/{category}/posts', 'WelcomeController@listPostOfCategory')->name('blog.cat_posts');
 
 Auth::routes();
 

@@ -16,4 +16,18 @@ class WelcomeController extends Controller
         $categories = Category::all();
         return view('welcome', compact('tags', 'posts', 'categories'));
     }
+
+    public function listPostOfCategory(Category $category){
+        $tags = Tag::all();
+        $categories = Category::all();
+        $posts = $category->posts()->get();
+        return view('welcome', compact('tags', 'posts', 'categories'));
+    }
+
+    public function listPostByKeyword($keyword){
+        $tags = Tag::all();
+        $categories = Category::all();
+        $post = Post::where('title', 'like', '%' . $keyword . '%')->get();
+        return view('welcome', compact('tags', 'posts', 'categories'));
+    }
 }

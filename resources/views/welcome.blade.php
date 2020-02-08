@@ -50,7 +50,7 @@
                     <div class="sidebar px-4 py-md-0">
 
                         <h6 class="sidebar-title">Search</h6>
-                        <form class="input-group" target="#" method="GET">
+                        <form class="input-group" target="" method="GET">
                             <input type="text" class="form-control" name="s" placeholder="Search">
                             <div class="input-group-addon">
                                 <span class="input-group-text"><i class="ti-search"></i></span>
@@ -62,7 +62,10 @@
                         <h6 class="sidebar-title">Categories</h6>
                         <div class="row link-color-default fs-14 lh-24">
                             @foreach($categories as $category)
-                                <div class="col-6"><a href="#">{{$category->title}}</a></div>
+                                <div class="col-6"><a href="{{Route('blog.cat_posts', $category)}}">
+                                        {{$category->title}}
+                                    </a>
+                                </div>
                             @endforeach
                         </div>
 

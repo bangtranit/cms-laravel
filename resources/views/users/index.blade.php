@@ -20,7 +20,9 @@
                 @foreach($users as $user)
                     <tr>
                         <td>
-                            {{$user->name}}
+                            <a href="{{Route('users.edit', $user)}}">
+                                {{$user->name}}
+                            </a>
                         </td>
                         <td>
                             {{$user->email}}

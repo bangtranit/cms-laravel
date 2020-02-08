@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\User\SetAdminRequest;
 
 class UserController extends Controller
 {
@@ -82,5 +83,19 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    /**
+     *
+     */
+    public function setadmin(SetAdminRequest $request){
+        $validated = $request->validated();
+        $user = User::findOrFail($request->id);
+        if ($user->isAdmin())
+            return $this->crudSuccess('error', 'This user are admin', 'users.index');
+        $user->role = User::USER_ADMIN;
+        $user->save();
+        return $this->crudSuccess('success', 'Set admin successfully', 'users.index');
     }
 }

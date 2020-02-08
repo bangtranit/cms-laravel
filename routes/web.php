@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('users', 'UserController');
+    Route::post('user/setadmin', 'UserController@setadmin')->name('users.setadmin');
 });
 
 

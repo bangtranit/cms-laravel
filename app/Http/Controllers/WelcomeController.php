@@ -12,7 +12,7 @@ class WelcomeController extends Controller
     public function index()
     {
         $tags = Tag::all();
-        $posts = Post::all();
+        $posts = Post::simplePaginate(2);
         $categories = Category::all();
         return view('welcome', compact('tags', 'posts', 'categories'));
     }

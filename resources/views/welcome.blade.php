@@ -11,14 +11,13 @@
     <div class="section bg-gray">
         <div class="container">
             <div class="row">
-
-
                 <div class="col-md-8 col-xl-9">
                     <div class="row gap-y">
                         @foreach($posts as $post)
                             <div class="col-md-6">
                                 <div class="card border hover-shadow-6 mb-6 d-block">
-                                    <a href="{{Route('blog.show', $post)}}"><img class="card-img-top" src="{{generatePathImage($post->image)}}"
+                                    <a href="{{Route('blog.show', $post)}}"><img class="card-img-top"
+                                                                                 src="{{generatePathImage($post->image)}}"
                                                      alt="Card image cap"></a>
                                     <div class="p-6 text-center">
                                         <p>
@@ -37,11 +36,7 @@
                         @endforeach
                     </div>
 
-
-                    <nav class="flexbox mt-30">
-                        <a class="btn btn-white disabled"><i class="ti-arrow-left fs-9 mr-4"></i> Newer</a>
-                        <a class="btn btn-white" href="#">Older <i class="ti-arrow-right fs-9 ml-4"></i></a>
-                    </nav>
+                    {{ $posts->links() }}
                 </div>
 
 
@@ -92,7 +87,10 @@
                         <hr>
 
                         <h6 class="sidebar-title">About</h6>
-                        <p class="small-3">TheSaaS is a responsive, professional, and multipurpose SaaS, Software, Startup and WebApp landing template powered by Bootstrap 4. TheSaaS is a powerful and super flexible tool for any kind of landing pages.</p>
+                        <p class="small-3">TheSaaS is a responsive, professional,
+                            and multipurpose SaaS, Software, Startup and WebApp landing
+                            template powered by Bootstrap 4. TheSaaS is a powerful and super
+                            flexible tool for any kind of landing pages.</p>
 
 
                     </div>

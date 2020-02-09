@@ -31,8 +31,8 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
 
-                <h1>Latest Blog Posts</h1>
-                <p class="lead-2 opacity-90 mt-6">Read and get updated on how we progress</p>
+                <h1>@yield('header_title_name')</h1>
+                <p class="lead-2 opacity-90 mt-6">@yield('header_description')</p>
 
             </div>
         </div>

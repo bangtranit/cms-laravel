@@ -1,12 +1,12 @@
 <!-- Header -->
 @section('title')
-    TheSaaS — Blog with sidebar
+    Category - {{$category->title}}
 @endsection
 @section('header_title_name')
-    Latest Blog Posts
+    {{$category->title}}
 @endsection
 @section('header_description')
-    Read and get updated on how we progress
+    {{$category->description}}
 @endsection
 @include('welcome_common.header')
 
@@ -24,7 +24,7 @@
                                 <div class="card border hover-shadow-6 mb-6 d-block">
                                     <a href="{{Route('blog.show', $post)}}"><img class="card-img-top"
                                                                                  src="{{generatePathImage($post->image)}}"
-                                                     alt="Card image cap"></a>
+                                                                                 alt="Card image cap"></a>
                                     <div class="p-6 text-center">
                                         <p>
                                             <a class="small-5 text-lighter text-uppercase ls-2 fw-400" href="#">
@@ -45,7 +45,6 @@
                             </p>
                         @endforelse
                     </div>
-
                     @if($posts->count() > 0)
                         {{ $posts->appends( ['search' => request()->query('keyword') ])->links() }}
                     @endif

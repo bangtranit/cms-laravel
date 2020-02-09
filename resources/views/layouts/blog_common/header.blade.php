@@ -17,6 +17,7 @@
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
     <link rel="icon" href="{{asset('img/favicon.png')}}">
+
 </head>
 
 <body>

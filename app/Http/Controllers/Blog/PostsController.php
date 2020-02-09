@@ -24,18 +24,9 @@ class PostsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function category(Category $category){
-        $posts = array();
-        $keyword = request()->query('keyword');
-        if ($keyword){
-            $posts = Post::query()
-                ->where('title', 'LIKE', "%{$keyword}%")
-                ->where('category_id', '=' , '{$category->id}')
-                ->simplePaginate(2);
-        }else{
-            $posts = $category->posts()->simplePaginate(2);
-        }
         $tags = Tag::all();
         $categories = Category::all();
+        $posts = $category->posts()->searched()->simplePaginate(2);
         return view('blog.category', compact('posts', 'tags', 'categories', 'category'));
     }
 
@@ -45,19 +36,10 @@ class PostsController extends Controller
      */
 
     public function tag(Tag $tag){
-//        $posts = array();
-//        $keyword = request()->query('keyword');
-//        if ($keyword){
-//            $posts = Post::query()
-//                ->where('title', 'LIKE', "%{$keyword}%")
-//                ->where('tag_id', '=' , '{$tag->id}')
-//                ->simplePaginate(2);
-//        }else{
-//            $posts = $tag->posts()->simplePaginate(2);
-//        }
         $posts = $tag->posts()->simplePaginate(1);
         $tags = Tag::all();
         $categories = Category::all();
+        $posts = $tag->posts()->searched()->simplePaginate(2);
         return view('blog.tag', compact('posts', 'tags', 'categories', 'tag'));
     }
 }

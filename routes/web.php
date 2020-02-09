@@ -11,15 +11,19 @@ use App\Http\Controllers\Blog\PostsController;
 |
 */
 
-Route::get('/', 'WelcomeController@index')->name('welcome');
-Route::get('/blog/post/{post}', [PostsController::class, 'show'])->name('blog.show');
-Route::get('/search', 'WelcomeController@listPostByKeyword')->name('blog.search');
-Route::get('blog/categories/{category}', [PostsController::class, 'category'])->name('blog.category');
-Route::get('blog/tags/{tag}', [PostsController::class, 'tag'])->name('blog.tag');
-Route::get('/category/{category}/posts', 'WelcomeController@listPostOfCategory')->name('blog.cat_posts');
-
 Auth::routes();
 
+/**
+ * Route for blog post
+ */
+Route::get('/', 'WelcomeController@index')->name('welcome');
+Route::get('/blog/post/{post}', [PostsController::class, 'show'])->name('blog.show');
+Route::get('blog/tags/{tag}', [PostsController::class, 'tag'])->name('blog.tag');
+Route::get('blog/categories/{category}', [PostsController::class, 'category'])->name('blog.category');
+
+/**
+ * Route for admin
+ */
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::resource('/categories', 'CategoryController');
@@ -29,12 +33,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/posts-restore/{post}', 'PostController@restorePost')->name('posts.restore');
 });
 
+/**
+ * Route for User admin
+ */
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('users', 'UserController');
     Route::post('user/setadmin', 'UserController@setadmin')->name('users.setadmin');
 });
-
-
-//Route::middleware(['auth'])->group(function (){
-//});
-

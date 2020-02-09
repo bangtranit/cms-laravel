@@ -55,4 +55,12 @@ class Post extends Model
     {
         return in_array($tagId, $this->tags->pluck('id')->toArray());
     }
+
+    public function scopeSearched($query){
+        $keyword = request()->query('keyword');
+        if (!$keyword){
+            return $query;
+        }
+        return $query->where('title', 'LIKE', "%{$keyword}%");
+    }
 }

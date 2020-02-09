@@ -64,11 +64,10 @@
 
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-
                     {!! $post->content !!}}
+
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-lg-8 mx-auto">
 
@@ -80,13 +79,15 @@
 
                 </div>
             </div>
-
-
+            <br>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                    <div class="addthis_inline_share_toolbox"></div>
+                </div>
+            </div>
         </div>
     </div>
-
-
-
     <!--
     |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
     | Comments
@@ -94,18 +95,14 @@
     !-->
     <div class="section bg-gray">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <hr>
                     <div id="disqus_thread"></div>
                     <script>
-
                         /**
                          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
                          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-
-
                         var disqus_config = function () {
                         this.page.url = "{{Route('blog.show', $post)}}";  // Replace PAGE_URL with your page's canonical URL variable
                         this.page.identifier = {{$post->id}}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
@@ -127,4 +124,5 @@
 
         </div>
     </div>
+
 @endsection

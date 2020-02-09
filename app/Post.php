@@ -27,7 +27,10 @@ class Post extends Model
         'user_id',
         'category_id',
     ];
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at',
+        'published_at'
+    ];
 
     /**
      * Delete image after update image
@@ -56,11 +59,15 @@ class Post extends Model
         return in_array($tagId, $this->tags->pluck('id')->toArray());
     }
 
+    public function scopePublished($query){
+        return $query->where('published_at', '<=', now());
+    }
+
     public function scopeSearched($query){
         $keyword = request()->query('keyword');
         if (!$keyword){
-            return $query;
+            return $query->published();
         }
-        return $query->where('title', 'LIKE', "%{$keyword}%");
+        return $query->published()->where('title', 'LIKE', "%{$keyword}%");
     }
 }

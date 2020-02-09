@@ -59,7 +59,6 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
 @endsection
 
 @section('scripts')
@@ -67,7 +66,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr("#published_at", {//id of component
-            enableTime: true
+            enableTime: true,
+            enableSeconds: true
         })
     </script>
 @endsection

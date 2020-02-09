@@ -75,7 +75,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr("#published_at", {//id of component
-            enableTime: true
+            enableTime: true,
+            enableSeconds: true
         })
     </script>
 @endsection

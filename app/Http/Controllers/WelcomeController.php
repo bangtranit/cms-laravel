@@ -24,10 +24,13 @@ class WelcomeController extends Controller
         return view('welcome', compact('tags', 'posts', 'categories'));
     }
 
-    public function listPostByKeyword($keyword){
+    public function listPostByKeyword(){
+        $keyword = request()->query('keyword');
         $tags = Tag::all();
         $categories = Category::all();
-        $post = Post::where('title', 'like', '%' . $keyword . '%')->get();
+        $posts = Post::query()
+                ->where('title', 'LIKE', "%{$keyword}%")
+                ->simplePaginate(2);
         return view('welcome', compact('tags', 'posts', 'categories'));
     }
 }
